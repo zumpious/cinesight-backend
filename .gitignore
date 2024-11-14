@@ -115,3 +115,6 @@ celerybeat.pid
 
 # macOS file
 .DS_Store
+
+# ignore movies.csv for the moment as it is to large for github
+imdb_api/movies.csv
