@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./deploy/Dockerfile
+      target: prod
+    image: imdb_api:${IMDB_API_VERSION:-latest}
+    restart: always
+    env_file:
+    - .env
+    environment:
+      IMDB_API_HOST: 0.0.0.0
