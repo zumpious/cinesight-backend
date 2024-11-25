@@ -8,17 +8,17 @@ import gender_guesser.detector as gender
 from os.path import dirname, join
 
 # Heavy lifting only once
-# Lol
+# this will be refactored in the future
 script_dir = dirname(dirname(dirname(dirname(dirname(__file__)))))
-
-print("Load movies...")
 
 dfs = []
 
 for year in range(1980, 2023):
+    print(year)
     rel_path = f'scraper/results/top100_{year}.json'
     abs_file_path = join(script_dir, rel_path)
 
+    print(abs_file_path)
     temp = pd.read_json(abs_file_path, orient=str)
     dfs.append(temp)
 
