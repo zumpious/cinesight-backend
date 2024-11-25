@@ -34,10 +34,10 @@ async def get_movie(movie_id):
         wc = WordCloud(max_words=100, stopwords=stopwords, margin=10,
                        random_state=1, background_color='white').generate(all_comments)
 
-        svg_string = wc.to_svg("test.svg")
-
-        with open("svgTest.svg", "w") as svg_file:
-            svg_file.write(svg_string)
+        # Stop generation world cloud svgs on api call
+        #svg_string = wc.to_svg("test.svg")
+        #with open("svgTest.svg", "w") as svg_file:
+        #    svg_file.write(svg_string)
 
         words = wc.words_
 

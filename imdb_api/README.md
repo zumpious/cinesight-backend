@@ -14,9 +14,22 @@ poetry install
 poetry run python -m imdb_api
 ```
 
-# Endpoints
+## API
 
-`/api/movies?year=1980?top=10`
+When the API is running the following endpoint can be feteched to get any overview over the exisiting API endpoints: 
+- `/api/docs`
+
+### API Endpoints
+
+- `/api/movies?year=1980&top=10`: Fetch the top 10 movies of the year 1980.
+- `/api/movies/{movie_id}`: Fetch details of a specific movie by its ID.
+- `/api/movies/flops`: Fetch the count of flops and successes based on the given year and rating.
+- `/api/plots/budgetrating`: Fetch a plot of budget vs rating.
+- `/api/plots/directorsgender`: Fetch a plot of director gender distribution.
+- `/api/plots/directorsgenderanimated`: Fetch an animated plot of director gender distribution over the years.
+- `/api/plots/budgetboxofficeanimated`: Fetch an animated plot of budget vs box office.
+- `/api/plots/ratingsovertime`: Fetch a plot of ratings over time.
+
 
 # Data Handling
 
