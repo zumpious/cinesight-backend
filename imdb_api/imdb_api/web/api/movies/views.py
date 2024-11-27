@@ -46,9 +46,18 @@ async def get_movie(movie_id):
             words[myword] = (words[myword], all_comments.count(myword))
 
         movie["wordcloud"] = words
-
         movie['release'] = pd.to_datetime(movie['release'])
         movie['release'] = movie['release'].strftime('%Y-%m-%d %H:%M:%S')
+
+        # remove currently not needed data from the response
+        # todo: instead of removing data, we should only include the data we need
+        movie = movie.drop("reviews")
+        movie = movie.drop("boxoffice_inflated")
+        movie = movie.drop("budget_inflated")
+        movie = movie.drop("ROI_category")
+        movie = movie.drop("director_gender")
+        movie = movie.drop("modified_rating")
+        movie = movie.drop("top_actor_gender")
 
         movie = movie.fillna('')
 
