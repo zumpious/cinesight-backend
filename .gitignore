@@ -118,3 +118,5 @@ celerybeat.pid
 
 # ignore movies.csv for the moment as it is to large for github
 imdb_api/movies.csv
+imdb_api/data_exploration.ipynb
+imdb_api/first_five_movies.csv
