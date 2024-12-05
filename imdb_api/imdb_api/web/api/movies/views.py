@@ -70,7 +70,7 @@ async def get_movie(movie_id):
 
 
 @router.get("/")
-async def get_movies(year: int = None, rating: float = None):
+async def get_movies(year: int = None, rating: float = None, page: int = 1, page_size: int = 10):
     filtered_movies = movies_df
 
     if year is not None:
@@ -79,11 +79,31 @@ async def get_movies(year: int = None, rating: float = None):
     if rating is not None:
         filtered_movies = filtered_movies.query("@rating <= rating <= @rating + 0.9")
 
-    filtered_movies["release"] = filtered_movies["release"].astype(str)
-    return_list = filtered_movies[
+    total_items = len(filtered_movies)
+    total_pages = (total_items + page_size - 1) // page_size
+    start_idx = (page - 1) * page_size
+    end_idx = min(start_idx + page_size, total_items)
+
+    # Slice the dataframe
+    paginated_movies = filtered_movies.iloc[start_idx:end_idx]
+    
+    # Convert to string and prepare return list
+    paginated_movies["release"] = paginated_movies["release"].astype(str)
+    return_list = paginated_movies[
         ["id", "title", "rating", "cover", "release"]].to_dict(orient="records")
 
-    return JSONResponse(return_list)
+    response = {
+        "movies": return_list,
+        "pagination": {
+            "current_page": page,
+            "total_pages": total_pages,
+            "total_items": total_items,
+            "has_next": page < total_pages,
+            "has_previous": page > 1
+        }
+    }
+
+    return JSONResponse(response)
 
 
 @router.get("/flops")
